@@ -1,71 +1,86 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import profileImg from "../assets/images/profile.jpg"; // placeholder
+import home1 from "../assets/images/home 1.jpeg";
+import home2 from "../assets/images/home2.jpeg";
+
+// Array of background images
+const backgrounds = [home1, home2];
 
 export default function HeroSection() {
+  const words = [
+    "Helping SMEs Grow",
+    "Affordable Marketing Support",
+    "Expert Training for Entrepreneurs",
+  ];
+
+  const [currentWord, setCurrentWord] = useState(0);
+  const [currentBg, setCurrentBg] = useState(0);
+
+  // Rotate headline words
+  useEffect(() => {
+    const wordInterval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 5000);
+    return () => clearInterval(wordInterval);
+  }, []);
+
+  // Rotate background images
+  useEffect(() => {
+    const bgInterval = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % backgrounds.length);
+    }, 6000); // change background every 5s
+    return () => clearInterval(bgInterval);
+  }, []);
+
   return (
-    <section className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white min-h-screen flex items-center">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-24">
-        
-        {/* Left content */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center text-white overflow-hidden">
+      {/* Animate background images sliding from right */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={currentBg}
+          src={backgrounds[currentBg]}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 mb-10 md:mb-0"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Helping SMEs Grow Through Training & Affordable Marketing Support
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Learn the basics. Let us market for you. Watch your business grow.
-          </p>
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.8 }}
+        />
+      </AnimatePresence>
 
-          {/* Introduction */}
-          <div className="bg-blue text-white-900 p-6 md:p-8 rounded-lg shadow-lg mb-6">
-            <p className="text-lg md:text-xl leading-relaxed">
-              Hi, I’m <strong>Dr. Lydia K. Mwai (PhD, MBA, MMSK)</strong> — a marketing expert, trainer, and SME supporter. With over 10 years of experience in teaching, training, and running successful marketing programs, I specialize in:
-            </p>
-            <ul className="list-disc list-inside mt-4 space-y-2">
-              <li>SME training on branding, customer service, and digital marketing</li>
-              <li>Affordable done-for-you marketing services to help small businesses attract and keep customers</li>
-            </ul>
-            <p className="mt-4">
-              I believe that every SME can grow when equipped with the right knowledge and consistent marketing.
-            </p>
-          </div>
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
 
-          {/* CTA Buttons */}
-          <div className="flex gap-4 flex-wrap">
-            <Link
-              to="/contact"
-              className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
-            >
-              Book a Free Consultation
-            </Link>
-            <Link
-              to="/services"
-              className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
-            >
-              Join Our Next Training
-            </Link>
-          </div>
-        </motion.div>
+      {/* Content */}
+      <div className="relative z-10 text-center px-6">
+        <AnimatePresence mode="wait">
+          <motion.h1
+            key={currentWord}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 1 }}
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
+            {words[currentWord]}
+          </motion.h1>
+        </AnimatePresence>
 
-        {/* Right image */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 flex justify-center"
-        >
-          <img
-            src={profileImg}
-            alt="Dr. Lydia Mwai"
-            className="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-white"
-          />
-        </motion.div>
-
+        <div className="flex gap-4 justify-center flex-wrap">
+          <Link
+            to="/contact"
+            className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
+          >
+            Book Consultation
+          </Link>
+          <Link
+            to="/services"
+            className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
+          >
+            Explore Services
+          </Link>
+        </div>
       </div>
     </section>
   );

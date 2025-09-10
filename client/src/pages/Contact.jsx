@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -12,21 +12,31 @@ export default function Contact() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    emailjs
-      .send(
-        "your_service_id",
-        "your_template_id",
-        formData,
-        "your_user_id"
-      )
-      .then(() => {
-        setStatus("Message sent successfully ✅");
-        setFormData({ name: "", email: "", message: "" });
-      })
-      .catch(() => setStatus("❌ Failed to send message. Try again."));
+  const submissionData = {
+    ...formData,
+    title: "Contact Request",  // default subject
+    time: new Date().toLocaleString(), // auto-generated timestamp
   };
+
+  emailjs
+    .send(
+      "service_9pcpztf",      // your service ID
+      "template_fsypeyj",     // your template ID
+      submissionData,         // must include all template variables
+      "RqA-sW87NjYsu31cE"     // your public key
+    )
+    .then(() => {
+      setStatus("Message sent successfully ✅");
+      setFormData({ name: "", email: "", message: "" });
+    })
+    .catch((err) => {
+      console.error("EmailJS error:", err);
+      setStatus("❌ Failed to send message. Try again.");
+    });
+};
+
 
   return (
     <motion.section
@@ -102,15 +112,10 @@ export default function Contact() {
         <div className="space-y-6 text-center md:text-left">
           <h3 className="text-2xl font-semibold text-gray-800">Contact Details</h3>
           <p className="text-gray-700">
-            <span className="font-bold">Phone/WhatsApp:</span>{" "}
-            <a
-              href="https://wa.me/254728840848"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-600 hover:underline"
-            >
+            <span className="font-bold">Phone:</span>{" "}
+          
               +254 728 840 848
-            </a>
+            
           </p>
           <p className="text-gray-700">
             <span className="font-bold">Email:</span> lydiakmwai@gmail.com
@@ -122,7 +127,7 @@ export default function Contact() {
           {/* Social Links */}
           <div className="flex gap-6 mt-6 justify-center md:justify-start text-2xl text-gray-700">
             <a
-              href="https://facebook.com"
+              href="https://facebook.com/Lydia.mwai"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-600 transition"
@@ -130,7 +135,7 @@ export default function Contact() {
               <FaFacebookF />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/lydia.k.mwai/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-pink-500 transition"
@@ -138,12 +143,21 @@ export default function Contact() {
               <FaInstagram />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/dr-lydia-mwai-phd-mmsk-20495a80/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-700 transition"
             >
               <FaLinkedinIn />
+            </a>
+          
+            <a
+              href="https://wa.me/254728840848"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-700 transition"
+            >
+              <FaWhatsapp />
             </a>
           </div>
         </div>

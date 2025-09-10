@@ -1,76 +1,63 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Sample testimonials data
+// Example testimonials data
 const testimonials = [
   {
     name: "Jane Mwangi",
-    title: "Small Retailer, Nyeri",
-    text: "Before Dr. Lydia’s training, I only posted randomly. Now I have a strategy and new customers every week!",
-    image: "/sample-images/jane.jpg", // replace with actual image later
+    image: "/src/assets/images/testimonial1.jpg", // replace with actual
+    text: "Dr. Lydia transformed our SME marketing strategy. Highly recommend her trainings!"
   },
   {
-    name: "Alice Wanjiku",
-    title: "Salon Owner, Nairobi",
-    text: "Her team set up my WhatsApp Business and Facebook page. I now get inquiries daily without stress.",
-    image: "/sample-images/alice.jpg",
+    name: "Samuel Otieno",
+    image: "/src/assets/images/testimonial2.jpg",
+    text: "Thanks to her consulting, our customer engagement increased by 50% in 3 months."
   },
   {
-    name: "Peter Otieno",
-    title: "Restaurant Owner, Kisumu",
-    text: "The marketing strategies I learned boosted my sales in just one month!",
-    image: "/sample-images/peter.jpg",
+    name: "Grace Wanjiru",
+    image: "/src/assets/images/testimonial3.jpg",
+    text: "Her approach is practical, actionable, and very affordable for small businesses."
   },
 ];
 
 export default function Testimonials() {
-  const [current, setCurrent] = useState(0);
+  const [index, setIndex] = useState(0);
 
+  // Auto-advance every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 5000); // Auto-slide every 5 seconds
-    return () => clearInterval(interval);
+      setIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000); // 5000ms = 5 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
   }, []);
 
   return (
-    <section className="bg-gray-50 py-16">
-      <h2 className="text-4xl font-bold text-blue-600 text-center mb-12">
-        What People Say
-      </h2>
+    <section className="bg-blue-50 py-24">
+      <div className="container mx-auto px-6 md:px-20 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-12">
+          What People Say
+        </h2>
 
-      <div className="max-w-3xl mx-auto relative">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.8 }}
-            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center gap-4"
-          >
-            <img
-              src={testimonials[current].image}
-              alt={testimonials[current].name}
-              className="w-24 h-24 rounded-full object-cover border-4 border-blue-100 shadow-md"
-            />
-            <p className="text-gray-700 italic mb-2">"{testimonials[current].text}"</p>
-            <h3 className="text-lg font-semibold text-blue-600">{testimonials[current].name}</h3>
-            <p className="text-gray-500 text-sm">{testimonials[current].title}</p>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation dots */}
-        <div className="flex justify-center mt-6 gap-3">
-          {testimonials.map((_, index) => (
-            <button
+        <div className="relative max-w-xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
               key={index}
-              onClick={() => setCurrent(index)}
-              className={`w-3 h-3 rounded-full transition ${
-                current === index ? "bg-blue-600" : "bg-gray-300"
-              }`}
-            />
-          ))}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.8 }}
+              className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center gap-4"
+            >
+              <img
+                src={testimonials[index].image}
+                alt={testimonials[index].name}
+                className="w-20 h-20 rounded-full object-cover shadow-md"
+              />
+              <p className="text-gray-700 text-lg italic">"{testimonials[index].text}"</p>
+              <h3 className="text-blue-600 font-semibold mt-2">{testimonials[index].name}</h3>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

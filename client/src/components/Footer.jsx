@@ -10,7 +10,15 @@ export default function Footer() {
         </div>
         <div className="flex flex-col gap-2">
           <p className="flex items-center gap-2">
-            <FaWhatsapp /> +254 728 840 848
+            <FaWhatsapp /> 
+           <a
+              href="https://wa.me/254728840848"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline"
+            >
+              +254 728 840 848
+            </a>
           </p>
           <p className="flex items-center gap-2">
             <FaEnvelope /> lydiakmwai@gmail.com

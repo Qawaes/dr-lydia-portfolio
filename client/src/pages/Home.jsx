@@ -1,13 +1,7 @@
+import { motion } from "framer-motion";
 import HeroSection from "../components/HeroSection";
 import Testimonials from "../components/Testimonials";
-import { motion } from "framer-motion";
-
-// Sample Services Component
-
-
-
-
-
+import AboutSection from "../components/AboutSection";
 export default function Home() {
   return (
     <motion.div
@@ -15,29 +9,36 @@ export default function Home() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
+      {/* Hero Section with background image + changing words */}
       <HeroSection />
 
-      {/* Services Section */}
-   
+      {/* About Section snippet (Dr. Lydia introduction) */}
+      {/* <section className="bg-gray-50 py-24 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10">
+        {/* Left content */}
+        {/* <div className="md:w-1/2 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6">
+            Hi, I’m Dr. Lydia K. Mwai (PhD, MBA, MMSK)
+          </h2>
+          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            I’m a marketing expert, trainer, and SME supporter with over 10 years of experience in teaching, training, and running successful marketing programs. I specialize in SME training on branding, customer service, and digital marketing, as well as affordable done-for-you marketing services.
+          </p>
+         
+        </div> */}
+
+        {/* Right content */}
+        {/* <div className="md:w-1/2 flex justify-center md:justify-end">
+          <img
+            src="/src/assets/images/profile.jpeg" // replace with your image
+            alt="Dr. Lydia"
+            className="w-64 h-64 md:w-80 md:h-80 rounded-lg object-cover shadow-2xl border-4 border-white"
+          />
+        </div>
+      </section> */} 
+      <AboutSection />
+
 
       {/* Testimonials Section */}
       <Testimonials />
-
-      {/* CTA Section */}
-      <section className="py-16 bg-blue-600 text-white text-center">
-        <h2 className="text-4xl font-bold mb-6">Ready to Grow Your Business?</h2>
-        <p className="text-lg mb-6">
-          Join Dr. Lydia's training or book marketing support to take your SME to the next level.
-        </p>
-        <div className="flex justify-center gap-4 flex-wrap">
-          <button className="px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-lg hover:bg-yellow-500 transition">
-            Book a Free Consultation
-          </button>
-          <button className="px-6 py-3 border border-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition">
-            Join Our Next Training
-          </button>
-        </div>
-      </section>
     </motion.div>
   );
 }
