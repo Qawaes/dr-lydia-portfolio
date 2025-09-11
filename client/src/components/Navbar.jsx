@@ -18,7 +18,7 @@ export default function Navbar() {
     <nav className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
         <Link to="/" className="font-bold text-xl text-blue-600">
-          Dr. Lydia Mwai
+          Dr. Lydia Mwai - Pulse Points Marketing
         </Link>
         <div className="hidden md:flex space-x-6">
           {links.map((link) => (

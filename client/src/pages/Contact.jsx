@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok, FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -118,7 +118,7 @@ export default function Contact() {
             
           </p>
           <p className="text-gray-700">
-            <span className="font-bold">Email:</span> lydiakmwai@gmail.com
+            <span className="font-bold">Email:</span>lydiakmwai@gmail.com
           </p>
           <p className="text-gray-700">
             <span className="font-bold">Location:</span> Nairobi, Kenya
@@ -127,7 +127,7 @@ export default function Contact() {
           {/* Social Links */}
           <div className="flex gap-6 mt-6 justify-center md:justify-start text-2xl text-gray-700">
             <a
-              href="https://facebook.com/Lydia.mwai"
+              href="https://www.facebook.com/profile.php?id=61580388701558"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-600 transition"
@@ -151,6 +151,15 @@ export default function Contact() {
               <FaLinkedinIn />
             </a>
           
+             <a
+              href="https://www.tiktok.com/@pulse.point.marketing?_t=ZP-8zdl4WFSn7P&_r=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-700 transition"
+            >
+              <FaTiktok />
+            </a>
+
             <a
               href="https://wa.me/254728840848"
               target="_blank"
